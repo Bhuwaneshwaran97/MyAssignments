@@ -1,6 +1,7 @@
 package week3day2_assignments;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,16 +19,10 @@ public class FindSecondLargest {
 			emptySet.add(data[i]);
 		}
 		
-		List<Integer> setToList = new ArrayList<Integer>();
-		System.out.println("From set to list converted is "+emptySet);
-//		List<Integer> subList = emptyList.subList(4, 5);
-		
-//		System.out.println("The second largest value is "+subList);
-		for (int i =0; i<emptySet.size();i++) {
-			setToList.add(i);
-		}
-		
-		System.out.println(setToList);
+		List<Integer> setToList = new ArrayList<Integer>(emptySet);
+		Collections.sort(setToList);
+		int size = setToList.size();
+		System.out.println(size-2);
 	}
 
 }
