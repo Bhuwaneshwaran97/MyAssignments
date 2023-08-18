@@ -16,20 +16,22 @@ public class buyTheValue {
 		ChromeDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://buythevalue.in/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		WebElement firstProduct = driver.findElement(By.xpath("(//div[@class='product-image'])[1]"));
 		System.out.println(firstProduct.getLocation());
 		Actions firstProductScroll = new Actions(driver);
-		firstProductScroll.scrollByAmount(45, 962);
+		firstProductScroll.scrollByAmount(45, 962).perform();
 		firstProduct.click();
 		driver.findElement(By.xpath("//input[@placeholder='Enter Zipcode']")).sendKeys("605008");
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//div[@class='wk_zipfinder_btn']//input")).click();
-		Thread.sleep(2000);
+		WebElement checkButton = driver.findElement(By.xpath("//input[@value='Check']"));
+		driver.executeScript("arguments[0].click()", checkButton);
 		driver.findElement(By.xpath("//button[@id='product-add-to-cart']/span")).click();
-		driver.findElement(By.xpath("//a[text()='View Cart']")).click();
+		Thread.sleep(5000);
+		WebElement viewCart = driver.findElement(By.xpath("//a[text()='View Cart']"));
+		driver.executeScript("arguments[0].click()", viewCart);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//input[@id='checkout']")).click();
+		Thread.sleep(2000);
 		driver.switchTo().alert().accept();
 	}
 
